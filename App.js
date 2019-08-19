@@ -1,21 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 import {
   View,
-  Text
 } from 'react-native';
+import AddTodo from './components/AddTodo';
+import VisibleTodoList from './components/VisibleTodoList';
+import FilterToggle from './components/FilterToggle';
+import todoApp from './redux/reducers';
+import {addTodo} from './redux/actions';
 
-
+const store = createStore(todoApp)
+ 
 const App = () => {
   return (
-    <View><Text>Hello World!</Text></View>
+    <Provider store={store}>
+      <View style={{flex: 1}}>
+        <FilterToggle />
+        <AddTodo />
+        <VisibleTodoList/>
+      </View>
+    </Provider>
+
   );
 };
 
